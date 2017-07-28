@@ -57,17 +57,78 @@ textarea {
    ========================================================================== */
 
 
+.valDisplay{
+    font-size:18px;
+    text-align:center;
+    margin-top:.5em;
+    text-shadow:1px 1px 15px #ccc;
+    font-weight:bold;
+}
+
+
+/* Stat Styles */
+.statName{
+    font-weight:bold;
+    text-align:left;
+}
+
+.statCash{color:#6DA300;}
+.statEnergy{color:#F5C04E;}
+.statLove{color:#F76F6F;}
+.statDay{color:#303030;}
+
+
+.actions .btn{
+    font-size:18px;
+    background:white;
+    padding:1em;
+    font-weight:bold;
+}
 
 
 
+.locations .btn{
+    font-size:16px;
+    background:white;
+    padding:1em
+    margin:.6em;
+}
 
+h1{text-align: center;}
 
+/* Scene stuff */
 
+.scene{
+    min-height:400px;
+}
 
+.sceneArea{
+    background:#ccc;
+    height:450px;
+    width:100%;
+}
 
+/* For the sprite, suggest to save all the iterations for easy bg changing */
+.spriteArea{
+    position:relative;
+    background-image:url('http://i.imgur.com/MAW88ZO.png');
+    background-repeat: no-repeat;
+    height:500px;
+    width:422px;
+    z-index:111;
+}
 
+.scene .dialog{
+    background:black;
+    color:white;
+    padding:1em;
+    box-sizing:border-box;
+    font-size:16px;
+}
 
-
+.dialog{
+    display:flex;
+}
 
 
 /* ==========================================================================
