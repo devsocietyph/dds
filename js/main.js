@@ -62,13 +62,14 @@ function update_display(player) {
 		}
 	}
 	$(".inventory").html(inventory_html)
-	$(".statLocation").text(player.location)
+	$(".statLocation").text(player.location.toLowerCase())
 }
 
 function update_location(player, location) {
 	player.location = location
 
 	// Update action buttons depending on location
+	$(".sceneArea").css({"background-image" : "url('img/locations/"+location.toLowerCase()+".jpg')", "background-size" : "100% 450px"})
 	if(location == "Home") {
 		$(".btnThree").html("Sleep")
 		$(".btnThree").click(function() {
@@ -98,8 +99,8 @@ function update_location(player, location) {
 }
 
 player = new Player("Keith")
-update_display(player)
 update_location(player, "Home")
+update_display(player)
 
 $(".locOne").click(function() {
 	update_location(player, "Home")
