@@ -101,7 +101,7 @@ function update_location(player, location) {
 	player.location = location
 	update_display(player)
 
-	// Update action buttons depending on location
+	// Update backdrop
 	$(".sceneArea").css({"background-image" : "url('img/locations/"+location.toLowerCase()+".jpg')", "background-size" : "100% 450px"})
 
 	// Update button labels
@@ -164,6 +164,7 @@ $(".btnTwo").click(function() {
 	}
 	if(player.location == "Malacanang" && player.current_action != "Talking") {
 		// Giving a gift
+		// HELP THERES A BUG
 		player.current_action = "Giving"
 		$(".btnOne").html("Give "+player.inventory[0].name)
 		$(".btnOne").click(function() {
