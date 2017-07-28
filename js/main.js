@@ -41,27 +41,35 @@ function give_item(player, item_name) {
 }
 
 function work(player) {
-	if(player.energy > 0) {
-		player.money += 200 // How much money does he earn??
-		player.energy -= 1
-	}
+	player.money += 200 // How much money does he earn??
+	reduce_energy(player, 1)
 }
 
 function sleep(player) {
 	// Sleep and enter the next day
 	player.energy = 10
 	player.day += 1
-	if(player.day == 11) {
-		finish_game()
+	if(player.day > 10) {
+		finish_game(player)
 	}
 }
 
-function finish_game() {
-	if(love == 500) {
+function reduce_energy(player, amt) {
+	if(player.energy > 0) {
+		player.energy -= amt
+	}
+	else {
+		alert("You are out of energy! Time to sleep! :)")
+		sleep(player)
+	}
+}
+
+function finish_game(player) {
+	if(player.love == 500) {
 		alert("You've won Duterte's heart and now you will make sweet love on the Presidential bed.")
 	}
 	else {
-		alert("Duterte thinks you're an NPA spy and wants you dead.")
+		alert("Duterte thinks you're an drug pusher and wants you dead.")
 	}
 }
 
