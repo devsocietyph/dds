@@ -33,12 +33,14 @@ function give_item(player, item_name) {
 	// Reduce instance of item in inventory
 	// Increase love meter
 	for(i = 0; i < player.inventory.length; i++) {
-		if(player.inventory[i].name == item_name && player.inventory[i].instance > 0) {
-			player.inventory[i].instance -= 1
-			player.love += player.inventory[i].love_val
-		}
-		else {
-			alert("You do not have that!")
+		if(player.inventory[i].name == item_name) {
+			if(player.inventory[i].instance > 0) {
+				player.inventory[i].instance -= 1
+				player.love += player.inventory[i].love_val
+			}
+			else {
+				alert("You do not have that!")
+			}
 		}
 	}
 }
@@ -62,7 +64,7 @@ function reduce_energy(player, amt) {
 		player.energy -= amt
 	}
 	else {
-		alert("You are out of energy! Time to sleep! :)")
+		alert("You are out of energy! Go to sleep!")
 		sleep(player)
 	}
 }
@@ -88,11 +90,11 @@ function update_display(player) {
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
 		if(player.inventory[i].instance > 0) {
-			inventory_html +=  player.inventory[i].name + ": " + player.inventory[i].instance + "<br/>"
+			inventory_html +=  "<span class='valDisplay'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>"
 		}
 	}
 	$(".inventory").html(inventory_html)
-	$(".statLocation").text(player.location.toLowerCase())
+	$(".statLocation").text(player.location.toUpperCase())
 }
 
 function update_location(player, location) {
@@ -104,9 +106,9 @@ function update_location(player, location) {
 
 	// Update button labels
 	if(location == "Home") {
-		$(".btnOne").html("&nbsp;")
+		$(".btnOne").html("Sleep")
 		$(".btnTwo").html("Work")
-		$(".btnThree").html("Sleep")
+		$(".btnThree").html("&nbsp;")
 	}
 
 	if(location == "Malacanang") {
@@ -140,6 +142,11 @@ $(".locThree").click(function() {
 
 // Action Buttons
 $(".btnOne").click(function() {
+	if(player.location == "Home") {
+		player.current_action = "Idle"
+		sleep(player)
+		update_display(player)
+	}
 	if(player.location == "Sari-sari") {
 		buy_item(player, player.inventory[0].name)
 		update_display(player)
@@ -155,7 +162,9 @@ $(".btnTwo").click(function() {
 		buy_item(player, player.inventory[1].name)
 		update_display(player)
 	}
-	if(player.location == "Malacanang") {
+	if(player.location == "Malacanang" && player.current_action != "Talking") {
+		// Giving a gift
+		player.current_action = "Giving"
 		$(".btnOne").html("Give "+player.inventory[0].name)
 		$(".btnOne").click(function() {
 			give_item(player, player.inventory[0].name)
@@ -175,10 +184,6 @@ $(".btnTwo").click(function() {
 })
 
 $(".btnThree").click(function() {
-	if(player.location == "Home") {
-		sleep(player)
-		update_display(player)
-	}
 	if(player.location == "Sari-sari") {
 		buy_item(player, player.inventory[2].name)
 		update_display(player)
