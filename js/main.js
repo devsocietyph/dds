@@ -7,7 +7,7 @@ function Player(name) {
 	this.love = 0
 	this.money = 0
 	this.day = 1
-	this.current_action = ""
+	this.current_action = "" // Giving Item or Talking
 	this.location = ""
 }
 
@@ -37,6 +37,13 @@ function give_item(player, item_name) {
 			player.inventory[i].instance -= 1
 			player.love += player.inventory[i].love_val
 		}
+	}
+}
+
+function work(player) {
+	if(player.energy > 0) {
+		player.money += 200 // How much money does he earn??
+		player.energy -= 1
 	}
 }
 
@@ -70,38 +77,32 @@ function update_location(player, location) {
 
 	// Update action buttons depending on location
 	$(".sceneArea").css({"background-image" : "url('img/locations/"+location.toLowerCase()+".jpg')", "background-size" : "100% 450px"})
+
+	// Update button labels
 	if(location == "Home") {
+		$(".btnOne").html(" ")
+		$(".btnTwo").html("Work")
 		$(".btnThree").html("Sleep")
-		$(".btnThree").click(function() {
-			sleep(player)
-			update_display(player)
-		})
+	}
+
+	if(location == "Malacanang") {
+		$(".btnOne").html("Talk")
+		$(".btnTwo").html("Give Gift")
+		$(".btnThree").html(" ")
 	}
 
 	if(location == "Sari-sari store") {
 		$(".btnOne").html("Buy "+player.inventory[0].name)
-		$(".btnOne").click(function() {
-			buy_item(player, player.inventory[0].name)
-			update_display(player)
-		})
 		$(".btnTwo").html("Buy "+player.inventory[1].name)
-		$(".btnTwo").click(function() {
-			buy_item(player, player.inventory[1].name)
-			update_display(player)
-		})
 		$(".btnThree").html("Buy "+player.inventory[2].name)
-		$(".btnThree").click(function() {
-			buy_item(player, player.inventory[2].name)
-			update_display(player)
-		})
 	}
-	update_display(player)
 }
 
 player = new Player("Keith")
 update_location(player, "Home")
 update_display(player)
 
+// Location Buttons
 $(".locOne").click(function() {
 	update_location(player, "Home")
 })
@@ -110,4 +111,35 @@ $(".locTwo").click(function() {
 })
 $(".locThree").click(function() {
 	update_location(player, "Sari-sari store")
+})
+
+
+// Action Buttons
+$(".btnOne").click(function() {
+	if(player.location == "Sari-sari store") {
+		buy_item(player, player.inventory[0].name)
+		update_display(player)
+	}
+})
+
+$(".btnTwo").click(function() {
+	if(player.location == "Home") {
+		work(player)
+		update_display(player)
+	}
+	if(player.location == "Sari-sari store") {
+		buy_item(player, player.inventory[1].name)
+		update_display(player)
+	}
+})
+
+$(".btnThree").click(function() {
+	if(player.location == "Home") {
+		sleep(player)
+		update_display(player)
+	}
+	if(player.location == "Sari-sari store") {
+		buy_item(player, player.inventory[2].name)
+		update_display(player)
+	}
 })
