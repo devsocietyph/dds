@@ -51,6 +51,18 @@ function sleep(player) {
 	// Sleep and enter the next day
 	player.energy = 10
 	player.day += 1
+	if(player.day == 11) {
+		finish_game()
+	}
+}
+
+function finish_game() {
+	if(love == 500) {
+		alert("You've won Duterte's heart and now you will make sweet love on the Presidential bed.")
+	}
+	else {
+		alert("Duterte thinks you're an NPA spy and wants you dead.")
+	}
 }
 
 function update_display(player) {
@@ -80,7 +92,7 @@ function update_location(player, location) {
 
 	// Update button labels
 	if(location == "Home") {
-		$(".btnOne").html(" ")
+		$(".btnOne").html("&nbsp;")
 		$(".btnTwo").html("Work")
 		$(".btnThree").html("Sleep")
 	}
@@ -88,7 +100,7 @@ function update_location(player, location) {
 	if(location == "Malacanang") {
 		$(".btnOne").html("Talk")
 		$(".btnTwo").html("Give Gift")
-		$(".btnThree").html(" ")
+		$(".btnThree").html("&nbsp;")
 	}
 
 	if(location == "Sari-sari store") {
