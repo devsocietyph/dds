@@ -37,6 +37,9 @@ function give_item(player, item_name) {
 			player.inventory[i].instance -= 1
 			player.love += player.inventory[i].love_val
 		}
+		else {
+			alert("You do not have that!")
+		}
 	}
 }
 
@@ -85,7 +88,7 @@ function update_display(player) {
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
 		if(player.inventory[i].instance > 0) {
-			inventory_html += player.inventory[i].name + ": " + player.inventory[i].instance + "<br/>"
+			inventory_html +=  player.inventory[i].name + ": " + player.inventory[i].instance + "<br/>"
 		}
 	}
 	$(".inventory").html(inventory_html)
@@ -94,6 +97,7 @@ function update_display(player) {
 
 function update_location(player, location) {
 	player.location = location
+	update_display(player)
 
 	// Update action buttons depending on location
 	$(".sceneArea").css({"background-image" : "url('img/locations/"+location.toLowerCase()+".jpg')", "background-size" : "100% 450px"})
@@ -111,7 +115,7 @@ function update_location(player, location) {
 		$(".btnThree").html("&nbsp;")
 	}
 
-	if(location == "Sari-sari store") {
+	if(location == "Sari-sari") {
 		$(".btnOne").html("Buy "+player.inventory[0].name)
 		$(".btnTwo").html("Buy "+player.inventory[1].name)
 		$(".btnThree").html("Buy "+player.inventory[2].name)
@@ -130,13 +134,13 @@ $(".locTwo").click(function() {
 	update_location(player, "Malacanang")
 })
 $(".locThree").click(function() {
-	update_location(player, "Sari-sari store")
+	update_location(player, "Sari-sari")
 })
 
 
 // Action Buttons
 $(".btnOne").click(function() {
-	if(player.location == "Sari-sari store") {
+	if(player.location == "Sari-sari") {
 		buy_item(player, player.inventory[0].name)
 		update_display(player)
 	}
@@ -147,9 +151,26 @@ $(".btnTwo").click(function() {
 		work(player)
 		update_display(player)
 	}
-	if(player.location == "Sari-sari store") {
+	if(player.location == "Sari-sari") {
 		buy_item(player, player.inventory[1].name)
 		update_display(player)
+	}
+	if(player.location == "Malacanang") {
+		$(".btnOne").html("Give "+player.inventory[0].name)
+		$(".btnOne").click(function() {
+			give_item(player, player.inventory[0].name)
+			update_display(player)
+		})
+		$(".btnTwo").html("Give "+player.inventory[1].name)		
+		$(".btnTwo").click(function() {
+			give_item(player, player.inventory[1].name)
+			update_display(player)
+		})
+		$(".btnThree").html("Give "+player.inventory[2].name)
+		$(".btnThree").click(function() {
+			give_item(player, player.inventory[2].name)
+			update_display(player)
+		})
 	}
 })
 
@@ -158,7 +179,7 @@ $(".btnThree").click(function() {
 		sleep(player)
 		update_display(player)
 	}
-	if(player.location == "Sari-sari store") {
+	if(player.location == "Sari-sari") {
 		buy_item(player, player.inventory[2].name)
 		update_display(player)
 	}
