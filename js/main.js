@@ -31,7 +31,8 @@ function update_display(player) {
 	$(".statCash").text("Cash: " + player.money + " PHP");
 	$(".statEnergy").text(player.energy + " Energy");
 	$(".statLove").text(player.love + " &hearts;");
-
+    
+    $(".sceneArea").css({"background-image" : "url('img/locations/malacanang.jpg'"})
 	// Update the inventory
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
