@@ -121,46 +121,5 @@ function talk(result){
     update_display(player)
 }
 
-//ok hAHA
-
-$(".btnTwo").click(function() {
-	if(player.location == "Home") {
-		work(player)
-		update_display(player)
-	}
-	if(player.location == "Sari-sari") {
-		buy_item(player, player.inventory[1].name)
-		update_display(player)
-	}
-	if(player.location == "Malacanang" && player.current_action != "Talking") {
-		// Giving a gift
-		player.current_action = "Giving"
-        
-		$(".btnOne").html("Give "+player.inventory[0].name)
-		$(".btnOne").click(function() {
-			give_item(player, player.inventory[0].name)
-			update_display(player)
-		})
-		$(".btnTwo").html("Give "+player.inventory[1].name)		
-		$(".btnTwo").click(function() {
-			give_item(player, player.inventory[1].name)
-			update_display(player)
-		})
-		$(".btnThree").html("Give "+player.inventory[2].name)
-		$(".btnThree").click(function() {
-			give_item(player, player.inventory[2].name)
-			update_display(player)
-		})
-	}
-})
-
-$(".btnThree").click(function() {
-	if(player.location == "Sari-sari") {
-		buy_item(player, player.inventory[2].name)
-		update_display(player)
-	}
-})
-
-
 player = new Player("Keith")
 update_display(player)
