@@ -36,7 +36,7 @@ function update_display(player) {
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
 		if(player.inventory[i].instance > 0) {
-			inventory_html +=  "<button type='button' class='btn btn-default valDisplay' onclick='giveItem('" + player.inventory[i].id + "')'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
+			inventory_html +=  "<button type='button' class='btn btn-default valDisplay'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
 		}
 	}
 	$(".inventory").html(inventory_html);
