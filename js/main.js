@@ -48,12 +48,14 @@ function update_display(player) {
 
 function giveItem(item){
     console.log("tried to give");
-    if(player.inventory[i].id == item) {
-        player.inventory[i].instance -= 1
-        console.log("Added " + player.inventory[i].id + "!");
-        $(".status").text("You gave " + player.inventory[i].name + " to Duterte! He is flattered!").fadeIn("slow");
+    for(i = 0; i < player.inventory.length; i++ {
+        if(player.inventory[i].id == item) {
+            player.inventory[i].instance -= 1
+            console.log("Added " + player.inventory[i].id + "!");
+            $(".status").text("You gave " + player.inventory[i].name + " to Duterte! He is flattered!").fadeIn("slow");
+        }
+        update_display(player);
     }
-    update_display(player);
 }
 
 function buyItem(item){
