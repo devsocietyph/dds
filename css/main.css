@@ -80,17 +80,17 @@ textarea {
 
 .actions .btn{
     font-size:18px;
-    background:white;
     padding:1em;
     font-weight:bold;
+    width:150px;
+    display:inline-block;
 }
 
 
-
-.locations .btn{
+.store .btn{
     font-size:16px;
+    padding:1em;
     background:white;
-    padding:1em
     margin:.6em;
 }
 
@@ -118,12 +118,29 @@ h1{text-align: center;}
     z-index:111;
 }
 
-.scene .dialog{
+.scene .dialogArea{
     background:black;
     color:white;
     padding:1em;
     box-sizing:border-box;
     font-size:16px;
+}
+
+.conv button{
+    color:#000 !important;
+    padding:.5em;
+    background:white;
+    border:none;
+}
+
+.status{
+    display:none;
+    padding:.5em;
+    font-size:17px;
+}
+
+.conv{
+    display:none;
 }
 
 .dialog{
