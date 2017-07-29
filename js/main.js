@@ -36,8 +36,8 @@ function update_display(player) {
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
 		if(player.inventory[i].instance > 0) {
-		    inventory_html +=  "<button type='button' class='btn btn-default valDisplay' onclick='giveItem('" + player.inventory[i].id + "')'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
-        }
+			inventory_html +=  "<button type='button' class='btn btn-default valDisplay' onclick='giveItem('" + player.inventory[i].id + "')'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
+		}
 	}
 	$(".inventory").html(inventory_html);
 }
@@ -48,12 +48,10 @@ function update_display(player) {
 
 function giveItem(item){
     console.log("tried to give");
-    for(i = 0; i < player.inventory.length; i++) {
-        if(player.inventory[i].id == item) {
-            player.inventory[i].instance -= 1
-            console.log("Added " + player.inventory[i].id + "!");
-            $(".status").text("You gave " + player.inventory[i].name + " to Duterte! He is flattered!").fadeIn("slow");
-        }  
+    if(player.inventory[i].id == item) {
+        player.inventory[i].instance -= 1
+        console.log("Added " + player.inventory[i].id + "!");
+        $(".status").text("You gave " + player.inventory[i].name + " to Duterte! He is flattered!").fadeIn("slow");
     }
     update_display(player);
 }
