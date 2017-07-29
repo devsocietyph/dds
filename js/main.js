@@ -1,8 +1,6 @@
 function Player(name) {
 	this.name = name
-	this.inventory = [new Item("drugs", "Drugs", 10, -50),
-					  new Item("martiallaw", "Martial Law", 100, 50),
-					  new Item("keith", "Keith's Photos", 100, 100)]
+	this.inventory = [new Item("itemid", "Item Name", 10, -50)]
 	this.energy = 5
 	this.love = 0
 	this.money = 0
@@ -31,13 +29,12 @@ function update_display(player) {
 	$(".statCash").text("Cash: " + player.money + " PHP");
 	$(".statEnergy").text(player.energy + " Energy");
 	$(".statLove").text(player.love + " &hearts;");
-    
-    $(".sceneArea").css({"background-image" : "url('img/locations/malacanang.jpg')", "background-size" : "100% 450px"})
+
 	// Update the inventory
 	inventory_html = "<h3>Inventory</h3>"
 	for(i = 0; i < player.inventory.length; i++) {
 		if(player.inventory[i].instance > 0) {
-			inventory_html +=  "<button type='button' class='btn btn-default valDisplay'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
+			inventory_html +=  "<button type='button' class='btn btn-default valDisplay' onclick='giveItem('" + player.inventory[i].id + "')'>" + player.inventory[i].name + ": " + player.inventory[i].instance + "</span><br/>";
 		}
 	}
 	$(".inventory").html(inventory_html);
@@ -96,9 +93,7 @@ function actionSleep(player) {
 
 // Conversations
 function actionTalk(player) {
-    if(player.energy >= 1){
-        var random;
-        console.log("TALK");
+    if(player.energy > 0){
         player.energy -= 1
         var random = Math.floor(Math.random() * $('.conv').length);
         $('.conv').hide().eq(random).show();
@@ -111,17 +106,19 @@ function actionTalk(player) {
 
 function talk(result){
     if(result == "right"){
-        $(".status").text("Duterte was pleased with your answer!").fadeIn("slow").delay("1000").fadeOut("slow")
+        //$(".status").text("Duterte was pleased with your answer!").fadeIn("slow").delay("1000").fadeOut("slow")
         player.love += 50
     }
     if(result == "wrong"){
-        $(".status").text("Duterte was anger. grrr!").fadeIn("slow").delay("1000").fadeOut("slow")
+        //$(".status").text("Duterte was anger. grrr!").fadeIn("slow").delay("1000").fadeOut("slow")
         player.love -= 10
     }
     $('.conv').fadeOut('slow')
+    $(".btnTalk").prop('disabled', false);
     update_display(player)
 }
 
 //ok hAHA
+
 player = new Player("Keith")
 update_display(player)
